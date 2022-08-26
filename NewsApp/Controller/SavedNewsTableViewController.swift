@@ -15,15 +15,19 @@ class SavedNewsTableViewController: UITableViewController
     var savedArticles = [NewsArticle]()
     var managedObjectContext: NSManagedObjectContext?
     
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         //tableView.frame = view.bounds
         
+        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
+        
         CoreDataManager.loadData()
         
-        if articles.isEmpty
+        if savedArticles.isEmpty
         {
             
         }
@@ -43,6 +47,7 @@ class SavedNewsTableViewController: UITableViewController
         actionSheetController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { action in
             CoreDataManager.deleteAllData(entity: "NewsArticle")
             CoreDataManager.loadData()
+            self.tableView.reloadData()
         }))
         
         actionSheetController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -68,11 +73,9 @@ class SavedNewsTableViewController: UITableViewController
         //cell.savedNewsTitleLabel.text = item.title
         //cell.savedNewsImageView.sd_setImage(with: URL(string: item.urlToImage ?? ""))
         
-        
-        
         let item = savedArticles[indexPath.row]
         cell.savedNewsTitleLabel.text = item.articleAuthor
-        //cell.savedNewsImageView.sd_setImage(with: URL(string: item.articleImageURL ?? ""))
+        cell.savedNewsImageView.sd_setImage(with: URL(string: item.articleImageURL ?? ""))
         
         return cell
     }
@@ -83,15 +86,25 @@ class SavedNewsTableViewController: UITableViewController
         
         guard let vc = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {return}
         
-        let item = articles[indexPath.row]
-        vc.item = item
+        let item = savedArticles[indexPath.row]
+        //vc.item = item
         
         //present(vc, animated: true)
         show(vc, sender: self)
         //navigationController?.pushViewController(vc, animated: true)
     }
     
-
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle == .delete
+        {
+            // Delete the row from the data source
+            managedObjectContext?.delete(CoreDataManager.savedArticles[indexPath.row])
+        }
+        CoreDataManager.saveData()
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -18,6 +18,10 @@ class NewsFeedViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
+        
         NetworkManager.fetchData { articles in
             self.articles = articles
             DispatchQueue.main.async

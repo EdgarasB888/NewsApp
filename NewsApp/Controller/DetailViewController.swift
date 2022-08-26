@@ -11,7 +11,7 @@ import CoreData
 class DetailViewController: UIViewController
 {
     var item: Article?
-    var savedArticles = [NewsArticle]()
+    //var savedArticles = [NewsArticle]()
     
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,9 +22,11 @@ class DetailViewController: UIViewController
     {
         super.viewDidLoad()
         
+        /*
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
-        
+        */
+         
         self.title = item?.author
         titleLabel.text = item?.title
         descriptionLabel.text = item?.articleDescription
@@ -43,6 +45,8 @@ class DetailViewController: UIViewController
         
         let newItem = NewsArticle(context: CoreDataManager.managedObjectContext!)
         newItem.articleAuthor = item?.author
+        newItem.articleImageURL = item?.urlToImage
+        newItem.articleDescription = item?.articleDescription
         CoreDataManager.savedArticles.append(newItem)
         
         /*
@@ -54,6 +58,7 @@ class DetailViewController: UIViewController
             news.setValue(item?.articleDescription, forKey: "articleDescription")
         }
          */
+        
         CoreDataManager.saveData()
     }
 
