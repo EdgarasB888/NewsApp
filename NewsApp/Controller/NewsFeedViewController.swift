@@ -10,7 +10,6 @@ import SDWebImage
 
 class NewsFeedViewController: UIViewController
 {
-
     var articles: [Article] = []
     
     @IBOutlet weak var tblView: UITableView!
@@ -19,8 +18,8 @@ class NewsFeedViewController: UIViewController
     {
         super.viewDidLoad()
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
+        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        //CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
         
         NetworkManager.fetchData { articles in
             self.articles = articles
@@ -59,6 +58,11 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource
         
         let item = articles[indexPath.row]
         vc.item = item
+        
+        vc.descriptionLabelText = item.articleDescription
+        vc.titleLabelText = item.title
+        vc.titleText = item.author
+        vc.articleImageUrl = item.urlToImage
         
         //present(vc, animated: true)
         show(vc, sender: self)

@@ -4,9 +4,10 @@
         <attribute name="articleAuthor" optional="YES" attributeType="String"/>
         <attribute name="articleDescription" optional="YES" attributeType="String"/>
         <attribute name="articleImageURL" optional="YES" attributeType="String"/>
+        <attribute name="articleTitle" optional="YES" attributeType="String"/>
         <attribute name="rowOrder" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="NewsArticle" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="NewsArticle" positionX="-63" positionY="-18" width="128" height="104"/>
     </elements>
 </model>

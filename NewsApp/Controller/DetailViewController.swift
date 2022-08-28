@@ -11,12 +11,15 @@ import CoreData
 class DetailViewController: UIViewController
 {
     var item: Article?
-    //var savedArticles = [NewsArticle]()
     
     @IBOutlet weak var newsImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    var titleText: String? = ""
+    var titleLabelText: String? = ""
+    var descriptionLabelText: String? = ""
+    var articleImageUrl: String? = ""
     
     override func viewDidLoad()
     {
@@ -27,11 +30,11 @@ class DetailViewController: UIViewController
         CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
         */
          
-        self.title = item?.author
-        titleLabel.text = item?.title
-        descriptionLabel.text = item?.articleDescription
+        self.title = titleText
+        titleLabel.text = titleLabelText
+        descriptionLabel.text = descriptionLabelText
         
-        newsImageView.sd_setImage(with: URL(string: item?.urlToImage ?? ""))
+        newsImageView.sd_setImage(with: URL(string: articleImageUrl ?? ""))
     }
     
     @IBAction func shareButtonTapped(_ sender: Any)
@@ -44,9 +47,10 @@ class DetailViewController: UIViewController
         basicAlertSheet(title: "Attention!", message: "Article successfully added to saved list!")
         
         let newItem = NewsArticle(context: CoreDataManager.managedObjectContext!)
-        newItem.articleAuthor = item?.author
-        newItem.articleImageURL = item?.urlToImage
-        newItem.articleDescription = item?.articleDescription
+        newItem.articleAuthor = titleText
+        newItem.articleTitle = titleLabelText
+        newItem.articleImageURL = articleImageUrl
+        newItem.articleDescription = descriptionLabelText
         CoreDataManager.savedArticles.append(newItem)
         
         /*
