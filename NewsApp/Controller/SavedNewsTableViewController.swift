@@ -39,7 +39,8 @@ class SavedNewsTableViewController: UITableViewController
         let actionSheetController = UIAlertController(title: "Warning!", message: "Do you really want to remove all items?", preferredStyle: .actionSheet)
         actionSheetController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { action in
             CoreDataManager.deleteAllData(entity: "NewsArticle")
-            CoreDataManager.loadData()
+            //CoreDataManager.loadData()
+            CoreDataManager.saveData()
             self.savedArticles = CoreDataManager.savedArticles
             self.tableView.reloadData()
         }))
@@ -114,11 +115,15 @@ class SavedNewsTableViewController: UITableViewController
         if editingStyle == .delete
         {
             // Delete the row from the data source
-            managedObjectContext?.delete(CoreDataManager.savedArticles[indexPath.row])
+            CoreDataManager.managedObjectContext?.delete(CoreDataManager.savedArticles[indexPath.row])
         }
         
         savedArticles = CoreDataManager.savedArticles
-        tableView.reloadData()
         CoreDataManager.saveData()
+        
+        DispatchQueue.main.async
+        {
+            tableView.reloadData()
+        }
     }
 }
