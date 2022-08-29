@@ -10,6 +10,7 @@
 		883A17B228B7EB4300A29D96 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883A17B128B7EB4300A29D96 /* WebViewController.swift */; };
 		883A17B428B8128200A29D96 /* SavedNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883A17B328B8128200A29D96 /* SavedNewsTableViewController.swift */; };
 		883A17B628B8146200A29D96 /* SavedNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883A17B528B8146200A29D96 /* SavedNewsTableViewCell.swift */; };
+		883D439828BD385B00D019A4 /* CustomPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D439728BD385B00D019A4 /* CustomPlaceholderView.swift */; };
 		8845153528B6594E004CE14A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845153428B6594E004CE14A /* AppDelegate.swift */; };
 		8845153728B6594E004CE14A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845153628B6594E004CE14A /* SceneDelegate.swift */; };
 		8845153928B6594E004CE14A /* NewsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845153828B6594E004CE14A /* NewsFeedViewController.swift */; };
@@ -30,6 +31,7 @@
 		883A17B128B7EB4300A29D96 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		883A17B328B8128200A29D96 /* SavedNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNewsTableViewController.swift; sourceTree = "<group>"; };
 		883A17B528B8146200A29D96 /* SavedNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedNewsTableViewCell.swift; sourceTree = "<group>"; };
+		883D439728BD385B00D019A4 /* CustomPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlaceholderView.swift; sourceTree = "<group>"; };
 		8845153128B6594E004CE14A /* NewsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8845153428B6594E004CE14A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8845153628B6594E004CE14A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				883A17B128B7EB4300A29D96 /* WebViewController.swift */,
 				883A17B328B8128200A29D96 /* SavedNewsTableViewController.swift */,
 				883A17B528B8146200A29D96 /* SavedNewsTableViewCell.swift */,
+				883D439728BD385B00D019A4 /* CustomPlaceholderView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				8845153928B6594E004CE14A /* NewsFeedViewController.swift in Sources */,
 				8845153528B6594E004CE14A /* AppDelegate.swift in Sources */,
 				885EA04728B8CE51006626CE /* CoreDataManager.swift in Sources */,
+				883D439828BD385B00D019A4 /* CustomPlaceholderView.swift in Sources */,
 				8845155228B65B0C004CE14A /* NewsTableViewCell.swift in Sources */,
 				8845153F28B6594F004CE14A /* NewsApp.xcdatamodeld in Sources */,
 				883A17B628B8146200A29D96 /* SavedNewsTableViewCell.swift in Sources */,

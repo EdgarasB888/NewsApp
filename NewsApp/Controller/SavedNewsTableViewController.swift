@@ -71,11 +71,13 @@ class SavedNewsTableViewController: UITableViewController
         }
         else
         {
-            let image = UIImage(named: "Nature")
-            let noDataImage = UIImageView(image: image)
-            noDataImage.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.frame.height)
-            tableView.backgroundView = noDataImage
-            tableView.separatorStyle = .none
+            let customPlaceholder = CustomPlaceholderView()
+            tableView.backgroundView = customPlaceholder
+
+            customPlaceholder.safetyAreaTopAnchor = tableView.safeAreaLayoutGuide.topAnchor
+            customPlaceholder.safetyAreaBottomAnchor = tableView.safeAreaLayoutGuide.bottomAnchor
+            customPlaceholder.safetyLeadingAnchor = tableView.safeAreaLayoutGuide.leadingAnchor
+            customPlaceholder.safetyTrailingAnchor = tableView.safeAreaLayoutGuide.trailingAnchor
 
             return 0
         }
@@ -84,6 +86,11 @@ class SavedNewsTableViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        if savedArticles.count != 0
+        {
+            tableView.backgroundView?.isHidden = true
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedNewsTableViewCell", for: indexPath) as? SavedNewsTableViewCell else {return UITableViewCell()}
         
         let item = savedArticles[indexPath.row]
@@ -114,16 +121,18 @@ class SavedNewsTableViewController: UITableViewController
     {
         if editingStyle == .delete
         {
-            // Delete the row from the data source
-            CoreDataManager.managedObjectContext?.delete(CoreDataManager.savedArticles[indexPath.row])
-        }
-        
-        savedArticles = CoreDataManager.savedArticles
-        CoreDataManager.saveData()
-        
-        DispatchQueue.main.async
-        {
-            tableView.reloadData()
+            let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {_ in
+                let item = CoreDataManager.savedArticles[indexPath.row]
+                CoreDataManager.managedObjectContext?.delete(item)
+                CoreDataManager.saveData()
+                self.savedArticles = CoreDataManager.savedArticles
+                tableView.reloadData()
+            }))
+            
+            self.present(alert, animated: true)
         }
     }
 }
