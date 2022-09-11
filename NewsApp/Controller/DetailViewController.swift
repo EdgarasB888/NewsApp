@@ -25,11 +25,9 @@ class DetailViewController: UIViewController
     {
         super.viewDidLoad()
         
-        /*
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         CoreDataManager.managedObjectContext = appDelegate.persistentContainer.viewContext
-        */
-         
+    
         self.title = titleText
         titleLabel.text = titleLabelText
         descriptionLabel.text = descriptionLabelText
